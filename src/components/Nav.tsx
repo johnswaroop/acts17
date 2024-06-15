@@ -1,15 +1,18 @@
 export const Nav = () => {
   return (
-    <div data-theme="light" className="navbar  z-10 fixed bg-base-100 h-min ">
+    <div
+      data-theme="light"
+      className="navbar items-center z-10 fixed bg-base-100 h-min "
+    >
       <div className="flex-1 gap-4">
-        <img className="w-44 " src="/logo6.png" alt="" />
+        <img className="w-32 " src="/logo6.png" alt="" />
         <span className="flex flex-col text-white font-bold text-2xl">
           <h1 className="text-5xl tracking-widest uppercase">Trinity </h1>
           <h1 className="text-base">International Bible Church</h1>
         </span>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-1 text-2xl font-bold text-white">
+        <ul className="menu menu-horizontal px-1 text-xl font-bold text-white">
           <li>
             <a>About</a>
           </li>

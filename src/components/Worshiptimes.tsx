@@ -32,13 +32,14 @@ export function Worshiptimes() {
     >
       <div className="h-fit w-full max-w-[1700px] flex bg-white py-[4vw] items-center justify-evenly">
         <div className="flex flex-col">
-          <picture className="h-40 w-40">
-            <img
-              src="https://cdn.sylvaniachurch.com/wp-content/uploads/2019/07/25122015/Sylvania-Church-is-a-reformed-Southern-Baptist-church-in-Tyler-TX.webp"
-              alt=""
-            />
-          </picture>
-          <h1 className="text-5xl text-black font-semibold mt-4">
+          <div className="flex gap-4 invert">
+            <img className="w-44 " src="/logo6.png" alt="" />
+            <span className="flex flex-col text-white font-bold text-2xl">
+              <h1 className="text-5xl tracking-widest uppercase">Trinity </h1>
+              <h1 className="text-base">International Bible Church</h1>
+            </span>
+          </div>
+          <h1 className="text-2xl text-black font-semibold mt-4">
             Worship Times
           </h1>
           <p className="text-l text-black mt-2">
