@@ -5,45 +5,50 @@ const churchSchedule = [
   {
     day: "Sunday Mornings",
     events: [
-      { name: "Sunday School", time: "9:00 am" },
-      { name: "Corporate Worship", time: "10:20 am" },
-      { name: "Livestream", time: "10:20 am" },
+      { name: "English Worship Service", time: "10:00 am" },
+      {
+        name: "Greek Worship Service",
+        subtext: "with the 3rd Greek Evangelical Church",
+        time: "11:15 am",
+      },
     ],
   },
+
   {
-    day: "Online Livestream",
-    events: [{ name: "Livestream", time: "10:20 am" }],
-  },
-  {
-    day: "Wednesday Nights",
+    day: "Thursday Evenings",
     events: [
-      { name: "Wednesday Night Dinner", time: "5:00 pm" },
-      { name: "AWANA", time: "5:45 pm" },
-      { name: "Youth & Adult Bible Studies", time: "6:00 pm" },
+      {
+        name: "English Bible Study",
+        time: "7:30 pm",
+        subtext: "(Zoom link available)",
+      },
     ],
   },
 ];
-
+// mix-blend-mode: multiply;
 export function Worshiptimes() {
   return (
     <div
       id="worship-times"
-      className="flex w-full h-full bg-white justify-center"
+      className="flex w-full h-full bg-white justify-center py-8"
     >
       <div className="h-fit w-full max-w-[1700px] flex bg-white py-[4vw] items-center justify-evenly">
         <div className="flex flex-col">
-          <div className="flex gap-4 invert">
-            <img className="w-32 " src="/logo6.png" alt="" />
-            <span className="flex flex-col text-white font-bold text-2xl">
-              <h1 className="text-5xl tracking-widest uppercase">Trinity </h1>
-              <h1 className="text-base">International Bible Church</h1>
-            </span>
+          <div className="flex gap-4 ">
+            <img
+              className="w-56 object-contain  "
+              src="/brown-logo.png"
+              alt=""
+            />
           </div>
-          <h1 className="text-2xl text-black font-semibold mt-4">
+          <h1 className="text-6xl  font-bold mt-4 text-[#2B2623]">
             Worship Times
           </h1>
-          <p className="text-l text-black">
-            2801 S SE Loop 323 Tyler, TX 75701
+          <p className="text-lg text-black mt-4 ">
+            Chelntrech 37, Athina 117 45
+          </p>
+          <p className="text-lg text-black  mt-1">
+            Building of the 3rd Greek Evangelical Church
           </p>
           <button
             onClick={() => {
@@ -52,7 +57,7 @@ export function Worshiptimes() {
                 "_blank"
               );
             }}
-            className="uppercase rounded-xl mt-6 bg-primary border-primary text-white text-xl p-4 px-6 w-fit font-medium"
+            className="uppercase font-bold rounded-xl mt-6 bg-primary border-primary text-white text-xl p-4 px-6 w-fit"
           >
             Get Directions
           </button>
@@ -62,13 +67,23 @@ export function Worshiptimes() {
             return (
               <span className="flex items-start gap-6" key={"day" + idx}>
                 <FaCalendarCheck color="#0F1E22" size={"2em"} />
-                <h1 className="text-3xl text-black font-semibold">
+                <h1 className="text-3xl text-[#2B2623] font-semibold">
                   {slot.day}
                   <span className="text-base gap-2 flex flex-col mt-3">
                     {slot.events.map((evt, idx) => {
                       return (
-                        <p className="text-black" key={"idx" + evt.name}>
-                          <strong>{evt.time}</strong> - {evt.name}
+                        <p
+                          className="text-[#2B2623] flex"
+                          key={"idx" + evt.name}
+                        >
+                          <strong className=" flex w-20 justify-end text-right mr-2">
+                            {evt.time}
+                          </strong>{" "}
+                          -{" "}
+                          <span className="ml-2 flex-col">
+                            <p> {evt.name}</p>
+                            {evt?.subtext && <p>{evt.subtext}</p>}
+                          </span>
                         </p>
                       );
                     })}

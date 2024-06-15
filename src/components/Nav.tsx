@@ -5,7 +5,7 @@ export const Nav = () => {
       className="navbar items-center z-10 fixed bg-base-100 h-min "
     >
       <div className="flex-1 gap-4">
-        <img className="w-32 " src="/logo6.png" alt="" />
+        <img className="w-32 " src="/white-logo.png" alt="" />
         <span className="flex flex-col text-white font-bold text-2xl">
           <h1 className="text-5xl tracking-widest uppercase">Trinity </h1>
           <h1 className="text-base">International Bible Church</h1>

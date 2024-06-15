@@ -11,14 +11,14 @@ const inter = Montserrat({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <>
+    <div className={`flex w-full flex-col ${inter.className}`}>
       <div
         style={{
           background: `url("/bible.jpg")`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
-        className={`bg-white flex w-full h-screen flex-col  ${inter.className} `}
+        className={`bg-white flex w-full h-screen flex-col  `}
       >
         <Nav />
         <div className="flex w-full max-w-[1700px] h-full mx-auto">
@@ -43,7 +43,10 @@ export default function Home() {
                 onClick={() => {
                   const element = document.getElementById("worship-times");
                   if (element) {
-                    element.scrollIntoView({ behavior: "smooth" });
+                    element.scrollIntoView({
+                      behavior: "smooth",
+                      inline: "nearest",
+                    });
                   }
                 }}
                 className="uppercase font-bold rounded-xl mt-6 bg-primary border-primary text-white text-xl p-4 px-6 "
@@ -61,6 +64,6 @@ export default function Home() {
       {/* statment of faith */}
       <Faqs />
       <Footer />
-    </>
+    </div>
   );
 }

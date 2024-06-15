@@ -2,8 +2,8 @@ import React from "react";
 
 function AboutChurch() {
   return (
-    <div className="flex w-full h-full bg-gray-200 justify-center">
-      <div className="h-fit w-full max-w-[1700px] flex mx-[4vw]  my-[4vw] rounded-xl overflow-hidden px-">
+    <div className="flex w-full h-full bg-gray-200 justify-center ">
+      <div className="h-fit w-full max-w-[1700px] flex mx-[4vw]  my-[4vw] rounded-xl overflow-hidden ">
         <picture className="w-[50%] h-[100%] ">
           <img
             src="https://cdn.sylvaniachurch.com/wp-content/uploads/2019/07/25112949/Sylvania-Church-Tyler-Texas.webp"

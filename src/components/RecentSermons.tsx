@@ -29,7 +29,7 @@ function RecentSermons() {
         <Card title="When The World Collapses" />
         <Card title="The Story Of King Manasseh" />
       </div>
-      <button className="mx-auto uppercase rounded-xl mt-[4vw] bg-white text-primary border-primary text-white text-xl p-4 px-6 w-fit font-medium">
+      <button className="mx-auto font-bold uppercase rounded-xl mt-[4vw] bg-white text-primary border-primary text-xl p-4 px-6 w-fit ">
         More Sermons
       </button>
     </div>
