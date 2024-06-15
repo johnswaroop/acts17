@@ -23,7 +23,7 @@ export const Nav = () => {
             <a>Sermons</a>
           </li>
           <li>
-            <a>Maps</a>
+            <a href="https://maps.app.goo.gl/EbXZGBmCVgB5M6N19">Maps</a>
           </li>
           <li>
             <a>Contact Us</a>
