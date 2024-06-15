@@ -15,10 +15,10 @@ export default function Home() {
       <div
         style={{
           background: `url("/bible.jpg")`,
-
+          backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
-        className={`bg-white flex w-full h-screen flex-col bg-cover ${inter.className}`}
+        className={`bg-white flex w-full h-screen flex-col  ${inter.className} `}
       >
         <Nav />
         <div className="flex w-full max-w-[1700px] h-full mx-auto">
@@ -30,7 +30,7 @@ export default function Home() {
           >
             <span className="text-white ">
               <p className="text-3xl font-semibold ">
-                Trinity International Bible Church
+                Trinity International Bible Church, in Athens, Greece
               </p>
               <h1 className="text-6xl font-bold w-[900px] leading-[110%] my-5">
                 Let the word of Christ <br></br> dwell in us and to set our
