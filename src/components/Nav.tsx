@@ -2,14 +2,26 @@ export const Nav = () => {
   return (
     <div data-theme="light" className="navbar  z-10 fixed bg-base-100 h-min">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl font-bold text-white">TIBC</a>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 text-xl font-bold text-white">
           <li>
-            <a>Link</a>
+            <a>About</a>
           </li>
           <li>
+            <a>Statement of Faith</a>
+          </li>
+          <li>
+            <a>Sermons</a>
+          </li>
+          <li>
+            <a>Locate Us - Maps</a>
+          </li>
+          <li>
+            <a>Contact Us</a>
+          </li>
+          {/* <li>
             <details>
               <summary>Parent</summary>
               <ul className="p-2 bg-base-100 rounded-t-none">
@@ -21,7 +33,7 @@ export const Nav = () => {
                 </li>
               </ul>
             </details>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

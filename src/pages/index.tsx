@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { Nav } from "../components/Nav";
 import { Worshiptimes } from "../components/Worshiptimes";
 import { AboutChurch } from "../components/AboutChurch";
@@ -7,17 +7,18 @@ import { RecentSermons } from "../components/RecentSermons";
 import { Faqs } from "../components/Faqs";
 import { Footer } from "../components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Montserrat({ subsets: ["latin"] });
 
 export default function Home() {
   return (
     <>
       <div
         style={{
-          background: `url("/hero1.jpg")`,
-          backgroundSize: "cover",
+          background: `url("/bible.jpg")`,
+
+          backgroundRepeat: "no-repeat",
         }}
-        className="bg-white flex w-full h-screen flex-col"
+        className={`bg-white flex w-full h-screen flex-col bg-cover ${inter.className}`}
       >
         <Nav />
         <div className="flex w-full max-w-[1700px] h-full mx-auto">
@@ -28,10 +29,10 @@ export default function Home() {
             className="flex  w-full h-full items-center p-[4vw] "
           >
             <span className="text-white ">
-              <p className="text-4xl font-semibold ">
+              <p className="text-3xl font-semibold ">
                 Trinity International Bible Church
               </p>
-              <h1 className="text-7xl font-bold w-[900px] leading-[110%] my-5">
+              <h1 className="text-6xl font-bold w-[900px] leading-[110%] my-5">
                 Let the word of Christ <br></br> dwell in us and to set our
                 affections on things above
               </h1>
