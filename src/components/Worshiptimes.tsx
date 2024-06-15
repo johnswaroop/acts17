@@ -33,7 +33,7 @@ export function Worshiptimes() {
       <div className="h-fit w-full max-w-[1700px] flex bg-white py-[4vw] items-center justify-evenly">
         <div className="flex flex-col">
           <div className="flex gap-4 invert">
-            <img className="w-44 " src="/logo6.png" alt="" />
+            <img className="w-32 " src="/logo6.png" alt="" />
             <span className="flex flex-col text-white font-bold text-2xl">
               <h1 className="text-5xl tracking-widest uppercase">Trinity </h1>
               <h1 className="text-base">International Bible Church</h1>
@@ -42,10 +42,18 @@ export function Worshiptimes() {
           <h1 className="text-2xl text-black font-semibold mt-4">
             Worship Times
           </h1>
-          <p className="text-l text-black mt-2">
+          <p className="text-l text-black">
             2801 S SE Loop 323 Tyler, TX 75701
           </p>
-          <button className="uppercase rounded-xl mt-6 bg-primary border-primary text-white text-xl p-4 px-6 w-fit font-medium">
+          <button
+            onClick={() => {
+              window.open(
+                "https://maps.app.goo.gl/EbXZGBmCVgB5M6N19",
+                "_blank"
+              );
+            }}
+            className="uppercase rounded-xl mt-6 bg-primary border-primary text-white text-xl p-4 px-6 w-fit font-medium"
+          >
             Get Directions
           </button>
         </div>
