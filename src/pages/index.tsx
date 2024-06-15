@@ -39,8 +39,16 @@ export default function Home() {
               <p className="font-medium text-2xl text-gray-300">
                 Join us on Sunday @ 10 AM
               </p>
-              <button className="uppercase rounded-xl mt-6 bg-primary border-primary text-white text-xl p-4 px-6 font-medium">
-                Worship Times
+              <button
+                onClick={() => {
+                  const element = document.getElementById("worship-times");
+                  if (element) {
+                    element.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+                className="uppercase font-bold rounded-xl mt-6 bg-primary border-primary text-white text-xl p-4 px-6 "
+              >
+                Directions & Worship Times
               </button>
             </span>
           </div>

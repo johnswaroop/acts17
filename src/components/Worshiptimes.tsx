@@ -26,7 +26,10 @@ const churchSchedule = [
 
 export function Worshiptimes() {
   return (
-    <div className="flex w-full h-full bg-white justify-center">
+    <div
+      id="worship-times"
+      className="flex w-full h-full bg-white justify-center"
+    >
       <div className="h-fit w-full max-w-[1700px] flex bg-white py-[4vw] items-center justify-evenly">
         <div className="flex flex-col">
           <picture className="h-40 w-40">
