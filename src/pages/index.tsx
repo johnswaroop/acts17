@@ -33,8 +33,7 @@ export default function Home() {
                 Trinity International Bible Church, in Athens, Greece
               </p>
               <h1 className="text-6xl font-bold w-[900px] leading-[110%] my-5">
-                Let the word of Christ <br></br> dwell in us and to set our
-                affections on things above
+                We preach Christ <br></br> and Him crucified
               </h1>
               <p className="font-medium text-2xl text-gray-300">
                 Join us on Sunday @ 10 AM

@@ -14,7 +14,7 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        primary: "#5D4E42",
+        primary: "#084428",
       },
     },
   },
@@ -24,7 +24,7 @@ const config: Config = {
       {
         dark: {
           ...require("daisyui/src/theming/themes")["dark"],
-          "base-100": "#5D4E42",
+          "base-100": "#084428",
         },
       },
     ],
