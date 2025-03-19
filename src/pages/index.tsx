@@ -6,6 +6,7 @@ import { AboutChurch } from "../components/AboutChurch";
 import RecentSermons from "../components/RecentSermons";
 import { Faqs } from "../components/Faqs";
 import { Footer } from "../components/Footer";
+import { Contact } from "../components/Contact";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -181,6 +182,16 @@ export default function Home() {
           transition={{ duration: 0.6 }}
         >
           <Faqs />
+        </motion.section>
+
+        <motion.section
+          id="contact"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <Contact />
         </motion.section>
       </main>
 

@@ -6,7 +6,7 @@ function Footer() {
     <footer className="bg-primary text-white">
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {/* Church Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
@@ -74,45 +74,6 @@ function Footer() {
             </ul>
           </div>
 
-          {/* Resources */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Resources</h4>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="text-white/80 hover:text-white text-sm transition-colors"
-                >
-                  Bible Study Materials
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-white/80 hover:text-white text-sm transition-colors"
-                >
-                  Prayer Requests
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-white/80 hover:text-white text-sm transition-colors"
-                >
-                  Giving
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-white/80 hover:text-white text-sm transition-colors"
-                >
-                  Events Calendar
-                </a>
-              </li>
-            </ul>
-          </div>
-
           {/* Contact Info */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
@@ -153,7 +114,12 @@ function Footer() {
                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                   />
                 </svg>
-                <span>contact@trinitychurch.gr</span>
+                <a
+                  href="mailto:nseferiadis@actsseventeen.com"
+                  className="hover:text-white transition-colors"
+                >
+                  nseferiadis@actsseventeen.com
+                </a>
               </li>
               <li className="flex items-center space-x-2">
                 <svg
@@ -169,7 +135,7 @@ function Footer() {
                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                   />
                 </svg>
-                <span>+30 XXX XXX XXXX</span>
+                <span>+306946794658</span>
               </li>
             </ul>
           </div>
@@ -186,7 +152,9 @@ function Footer() {
             </p>
             <div className="flex space-x-6">
               <a
-                href="#"
+                href="https://www.facebook.com/TrinityInternationalBibleChurchAthensGreece/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 <span className="sr-only">Facebook</span>
@@ -199,7 +167,9 @@ function Footer() {
                 </svg>
               </a>
               <a
-                href="#"
+                href="http://www.youtube.com/@livingsacrifice1979"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-white/60 hover:text-white transition-colors"
               >
                 <span className="sr-only">YouTube</span>
