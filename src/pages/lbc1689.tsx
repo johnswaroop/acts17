@@ -98,10 +98,7 @@ function LBC1689() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               className="mt-8 text-white/90 text-lg sm:text-xl max-w-2xl text-center"
-            >
-              A comprehensive statement of our church&apos;s theological
-              convictions
-            </motion.div>
+            ></motion.div>
           </motion.div>
         </section>
 

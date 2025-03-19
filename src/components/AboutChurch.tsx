@@ -27,13 +27,7 @@ function AboutChurch() {
             </p>
             <button
               onClick={() => {
-                const element = document.getElementById("statement");
-                if (element) {
-                  element.scrollIntoView({
-                    behavior: "smooth",
-                    inline: "nearest",
-                  });
-                }
+                window.location.href = "/statement";
               }}
               className="inline-flex items-center px-8 py-4 bg-primary text-white text-lg font-semibold rounded-lg hover:bg-primary/90 transition-colors duration-300 transform hover:scale-105"
             >
