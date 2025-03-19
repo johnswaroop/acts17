@@ -9,8 +9,14 @@ const getSermonsPage = async () => {
   return res.data;
 };
 
+type PreacherOption = {
+  text: string;
+  value: string;
+};
+
 type Data = {
-  name: any;
+  content?: string;
+  preachers?: PreacherOption[];
 };
 
 export default async function handler(
@@ -20,14 +26,20 @@ export default async function handler(
   let page = await getSermonsPage();
   const dom = new JSDOM(page);
   let element = dom.window.document.querySelector(".entry-content")?.innerHTML;
-  let preacherOptions = dom.window.document.querySelector("#preacher");
+  let preacherOptions = dom.window.document.querySelector(
+    "#preacher"
+  ) as HTMLSelectElement;
+
+  let preachers: PreacherOption[] = [];
   if (preacherOptions && preacherOptions.options) {
-    const preacherOptionslist = [...preacherOptions.options].map((option) => ({
+    preachers = Array.from(preacherOptions.options).map((option) => ({
       text: option.text,
       value: option.value,
     }));
   }
 
-  console.log(element);
-  res.status(200).json({ name: "John Doe" });
+  res.status(200).json({
+    content: element,
+    preachers,
+  });
 }

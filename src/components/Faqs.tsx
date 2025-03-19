@@ -1,47 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Item = ({ question, answer }: { question: string; answer: string }) => {
+interface ItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onToggle: () => void;
+  index: number;
+}
+
+const Item = ({ question, answer, isOpen, onToggle, index }: ItemProps) => {
   return (
-    <div className="collapse text-black h-fit bg-gray-200">
-      <input type="radio" name={"my-accordion-" + question} />
-      <div className="collapse-title text-xl font-medium">{question}</div>
-      <div className="collapse-content">
-        <p>{answer}</p>
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
+    >
+      <button
+        onClick={onToggle}
+        className="flex w-full items-center justify-between p-6 text-left"
+      >
+        <h3 className="text-xl font-semibold text-gray-900 pr-8">{question}</h3>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+          className="flex-shrink-0"
+        >
+          <svg
+            className="h-6 w-6 text-primary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </motion.div>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="px-6 pb-6">
+              <div className="h-px w-full bg-gray-200 mb-6" />
+              <p className="text-lg text-gray-600 leading-relaxed">{answer}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 
-const faqslist = [
+const faqsList = [
   {
-    question: "What are the core beliefs of a Reformed Baptist Church?",
+    question: "What should I expect during a Sunday service?",
     answers:
-      "Our church adheres to the doctrines of grace as articulated in Reformed theology, which emphasizes the sovereignty of God in all things, including salvation. We hold to the Five Solas, believe in the authority of Scripture, justification by faith alone, and practice believer's baptism.",
+      "Our Sunday services are centered around the expository preaching of God's Word. You'll experience reverent worship through hymns and spiritual songs, prayer, Scripture reading, and fellowship with believers from various backgrounds.",
   },
   {
-    question: "What is the worship service like?",
+    question: "Is there a dress code?",
     answers:
-      "Our services focus on glorifying God through preaching, prayer, singing hymns and contemporary worship songs that align with scriptural truths, and fellowship. We place a strong emphasis on expositional preaching to understand and apply the teachings of the Bible.",
+      "While we don't have a strict dress code, we encourage modest and respectful attire suitable for worship. Most attendees dress in smart casual to semi-formal wear.",
   },
   {
-    question: "How can I become a member?",
+    question: "Are there programs for children?",
     answers:
-      "Membership involves attending a membership class, sharing a testimony of faith in Christ, agreeing to our church's statement of faith and covenant, and being baptized if you have not already received believer's baptism.",
+      "Yes, we have age-appropriate Sunday School classes and nursery care available during our main service. Our children's ministry focuses on teaching Biblical truths in an engaging way.",
   },
   {
-    question: "What programs do you have for children and youth?",
+    question: "Do you have Bible studies during the week?",
     answers:
-      "We offer Sunday School classes for children and a youth group for teenagers. These programs teach the Bible in an age-appropriate way and provide a place for young people to grow in their faith and fellowship with peers.",
-  },
-  {
-    question: "How does your church view baptism?",
-    answers:
-      "We practice believer's baptism by immersion, which is a public declaration of one's faith in Jesus Christ and obedience to Him, following the example of Jesus Himself as recorded in the New Testament.",
-  },
-  {
-    question: "Do you have small group meetings?",
-    answers:
-      "Yes, we have small groups that meet throughout the week in homes or at the church. These groups are a key part of our church life for prayer, Bible study, fellowship, and mutual support.",
+      "Yes, we offer various Bible study groups throughout the week, including our main Wednesday evening Bible study. These provide opportunities for deeper study and fellowship.",
   },
   {
     question: "How can I get involved in serving?",
@@ -56,36 +96,52 @@ const faqslist = [
 ];
 
 function Faqs() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
   return (
-    <div className="flex w-full bg-white justify-center">
-      <div className="flex flex-col w-full max-w-[1700px] bg-white p-[4vw] h-fit">
-        <h1 className="mx-auto text-4xl font-bold text-primary">
-          More about us
-        </h1>
-        <div className="flex w-full h-full mt-[4vw]">
-          <div className="flex gap-8 w-full">
-            <div className="flex flex-col w-[50%] gap-6">
-              {faqslist.slice(0, 4).map((faq, idx) => {
-                return (
-                  <Item
-                    question={faq.question}
-                    answer={faq.answers}
-                    key={"col1" + idx}
-                  />
-                );
-              })}
-            </div>
-            <div className="flex flex-col w-[50%] gap-6">
-              {faqslist.slice(4).map((faq, idx) => {
-                return (
-                  <Item
-                    question={faq.question}
-                    answer={faq.answers}
-                    key={"col2" + idx}
-                  />
-                );
-              })}
-            </div>
+    <div className="w-full bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            More About Us
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Find answers to common questions about our church, services, and
+            ways to get involved in our community.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          <div className="space-y-6">
+            {faqsList.slice(0, 3).map((faq, idx) => (
+              <Item
+                key={idx}
+                question={faq.question}
+                answer={faq.answers}
+                isOpen={openIndex === idx}
+                onToggle={() => setOpenIndex(openIndex === idx ? null : idx)}
+                index={idx}
+              />
+            ))}
+          </div>
+          <div className="space-y-6">
+            {faqsList.slice(3).map((faq, idx) => (
+              <Item
+                key={idx + 3}
+                question={faq.question}
+                answer={faq.answers}
+                isOpen={openIndex === idx + 3}
+                onToggle={() =>
+                  setOpenIndex(openIndex === idx + 3 ? null : idx + 3)
+                }
+                index={idx + 3}
+              />
+            ))}
           </div>
         </div>
       </div>
