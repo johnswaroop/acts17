@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+
+interface SermonApiResponse {
+  id: string;
+  title: string;
+  preacher_name: string;
+  datetime: string;
+  description: string;
+  stuff: Array<{
+    type: string;
+    name: string;
+    count: string;
+    duration: string;
+  }>;
+}
 
 interface SermonCardProps {
   title: string;
@@ -10,6 +24,31 @@ interface SermonCardProps {
   thumbnail: string;
   index: number;
 }
+
+// Helper function to extract Vimeo video ID from base64 encoded iframe
+const getVimeoThumbnail = (base64String: string): string => {
+  try {
+    const decodedString = atob(base64String);
+    const videoIdMatch = decodedString.match(/video\/(\d+)/);
+    if (videoIdMatch && videoIdMatch[1]) {
+      return `https://vumbnail.com/${videoIdMatch[1]}.jpg`;
+    }
+    return "/cover.jpg"; // Fallback thumbnail
+  } catch (error) {
+    console.error("Error decoding Vimeo iframe:", error);
+    return "/cover.jpg";
+  }
+};
+
+// Helper function to format date
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
 
 const SermonCard = ({
   title,
@@ -21,12 +60,18 @@ const SermonCard = ({
 }: SermonCardProps) => {
   return (
     <motion.div
+      onClick={() =>
+        (window.location.href = `https://actsseventeen.com/sermons/${title.replace(
+          /\s+/g,
+          "-"
+        )}`)
+      }
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
       whileHover={{ y: -8 }}
-      className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
+      className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
     >
       <div className="relative h-48">
         <Image
@@ -74,32 +119,97 @@ const SermonCard = ({
 };
 
 function RecentSermons() {
-  const sermons = [
-    {
-      title: "Sola Scriptura In The Bible",
-      date: "March 17, 2024",
-      preacher: "Pastor John Smith",
-      description:
-        "Exploring the foundational principle of Scripture alone and its importance in our faith journey.",
-      thumbnail: "/cover.jpg",
-    },
-    {
-      title: "When The World Collapses",
-      date: "March 10, 2024",
-      preacher: "Pastor John Smith",
-      description:
-        "Finding hope and strength in Christ when facing life&apos;s challenges and uncertainties.",
-      thumbnail: "/cover.jpg",
-    },
-    {
-      title: "The Story Of King Manasseh",
-      date: "March 3, 2024",
-      preacher: "Pastor John Smith",
-      description:
-        "Lessons from the life of King Manasseh: repentance, restoration, and God's mercy.",
-      thumbnail: "/cover.jpg",
-    },
-  ];
+  const [sermons, setSermons] = useState<SermonCardProps[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchSermons = async () => {
+      try {
+        const response = await fetch(
+          "https://actsseventeen.com/wp-json/customapi/v1/latest-sermons"
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch sermons");
+        }
+        const data: SermonApiResponse[] = await response.json();
+
+        // Transform the data and take only the first 3 sermons
+        const transformedSermons = data.slice(0, 3).map((sermon, index) => {
+          const vimeoItem = sermon.stuff.find((item) => item.type === "code");
+          const thumbnail = vimeoItem
+            ? getVimeoThumbnail(vimeoItem.name)
+            : "/cover.jpg";
+
+          return {
+            title: sermon.title,
+            date: formatDate(sermon.datetime),
+            preacher: sermon.preacher_name,
+            description: sermon.description,
+            thumbnail,
+            index,
+          };
+        });
+
+        setSermons(transformedSermons);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSermons();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="w-full bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-200 rounded w-1/4 mx-auto mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto mb-8"></div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-xl overflow-hidden shadow-lg"
+                >
+                  <div className="h-48 bg-gray-200"></div>
+                  <div className="p-6">
+                    <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
+                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mb-3"></div>
+                    <div className="h-4 bg-gray-200 rounded w-full"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="w-full bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <p className="text-red-600">Error: {error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-4 text-primary hover:text-primary/80"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="w-full bg-gray-50">
@@ -123,7 +233,7 @@ function RecentSermons() {
         {/* Sermon Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {sermons.map((sermon, index) => (
-            <SermonCard key={index} {...sermon} index={index} />
+            <SermonCard key={sermon.title} {...sermon} index={index} />
           ))}
         </div>
 
@@ -135,6 +245,9 @@ function RecentSermons() {
           className="text-center"
         >
           <motion.button
+            onClick={() =>
+              (window.location.href = "https://actsseventeen.com/sermons")
+            }
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-4 bg-primary text-white text-lg font-semibold rounded-lg hover:bg-primary/90 transition-colors duration-300"
